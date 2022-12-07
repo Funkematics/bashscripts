@@ -9,10 +9,16 @@ read drives
 
 echo "you have $drives drives"
 
-
-for (( x = 0; x < $drives; x++))
-do
-    echo "$x"
-    smartctl -H /dev/sd${letters[x]}
-done
+if (($drives < 24))
+then
+    for (( x = 0; x < $drives; x++))
+    do
+        echo "$x"
+        echo "/dev/sd${letters[x]}"
+        printf "/dev/sd${letters[x]}" >> output.txt
+        printf "\n--------------------------------------------------------------------------------------------------------------------VVVV\n" >> output.txt
+        smartctl -H -A /dev/sd${letters[x]} >> output.txt
+        printf "\n------------------------------------------------------------------------------------------------------------------------\n" >> output.txt
+    done
+fi
 

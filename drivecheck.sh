@@ -9,7 +9,7 @@ read drives
 
 echo "you have $drives drives"
 
-if (($drives < 24))
+if (($drives < 26))
 then
     for (( x = 0; x < $drives; x++))
     do

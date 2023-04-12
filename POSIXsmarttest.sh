@@ -33,9 +33,12 @@ smart_test() {
 # Get the list of connected drives
 connected_drives=$(smartctl --scan | awk '{print $1}')
 
-# Iterate through the drives and run the smart test
+# Iterate through the drives and run the smart test simultaneously
 for drive in $connected_drives; do
-    smart_test "$drive"
+    smart_test "$drive" &
 done
+
+# Wait for all tests to finish before proceeding
+wait
 
 echo "All SMART tests completed. Check the results in $output_file."
